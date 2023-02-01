@@ -10,11 +10,11 @@ function tocaSom(idElementoAudio) {
     }
 }
 
-// 2. Executar sons com evento de "click" do mouse ou com "tab"
-// armazena elementos "button" do html com id "class" ".tecla"
+// 2. Executar sons a partir de eventos
+// armazena elementos "button" do html com id "class" ".tecla" em um array
 const listaDeTeclas = document.querySelectorAll('.tecla'); 
 
-// iteração para 
+// iteração para adicionar escutadores de eventos (on click, onkeydown) a cada elemento do array 
 for (let contador = 0; contador < listaDeTeclas.length; contador++) { 
     
     const tecla = listaDeTeclas[contador] // armazena um "button" da lista com base no contador
@@ -23,15 +23,15 @@ for (let contador = 0; contador < listaDeTeclas.length; contador++) {
 
     const idAudio = `#som_${instrumento}`; // armazena o nome do "id" do "button" (com base na classe)
 
-    // função anônima para executar a função "tocaSom"
-    // se a função fosse referenciada diretamente, seria executada direto pelo browser, o que é proibido
-    tecla.onclick = function () { 
+    // adicionando escutadores nos elementos do array
+    tecla.onclick = function () {     
+        // função anônima para executar a função "tocaSom"
+        // se a função fosse referenciada diretamente, seria executada direto pelo browser, o que é proibido
         tocaSom(idAudio)
     };
 
-    // função anônima para executar som e manter botão vermelho com "tab"
     tecla.onkeydown = function (evento) {
-        
+        // função anônima para executar som e manter botão vermelho com "tab"
         if (evento.code === 'Space' || evento.code === 'Enter') {
             tecla.classList.add('ativa')
         }
@@ -39,9 +39,8 @@ for (let contador = 0; contador < listaDeTeclas.length; contador++) {
     }
 
     tecla.onkeyup = function () {
+        // função anônima para retornar cor branca ao botão
         tecla.classList.remove('ativa')
     }
 
 }
-
-// 3. Executar sons pressionando teclas do teclado
